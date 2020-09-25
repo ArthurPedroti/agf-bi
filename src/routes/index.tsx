@@ -10,17 +10,27 @@ import ResetPassword from '../pages/ResetPassword';
 import Profile from '../pages/Profile';
 
 import Dashboard from '../pages/Dashboard';
+import { useAuth } from '../hooks/auth';
 
-const Routes: React.FC = () => (
-  <Switch>
-    <Route path="/" exact component={SignIn} />
-    <Route path="/signup" component={SignUp} />
-    <Route path="/forgot-password" component={ForgotPassword} />
-    <Route path="/reset-password" component={ResetPassword} />
+const Routes: React.FC = () => {
+  const { user, loading } = useAuth();
+  console.log(loading);
 
-    <Route path="/dashboard" component={Dashboard} isPrivate />
-    <Route path="/profile" component={Profile} isPrivate />
-  </Switch>
-);
+  if (loading) {
+    return <h1>Carregando...</h1>;
+  }
+
+  return (
+    <Switch>
+      <Route path="/" component={Dashboard} />
+      {/* <Route path="/" exact component={SignIn} /> */}
+      <Route path="/signup" component={SignUp} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
+
+      <Route path="/profile" component={Profile} isPrivate />
+    </Switch>
+  );
+};
 
 export default Routes;

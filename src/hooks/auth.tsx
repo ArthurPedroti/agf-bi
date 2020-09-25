@@ -1,4 +1,11 @@
-import React, { createContext, useCallback, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
+import { mutate } from 'swr';
 import api from '../services/api';
 
 interface User {
@@ -23,23 +30,45 @@ interface AuthContextData {
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
   updateUser(user: User): void;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@Template:token');
-    const user = localStorage.getItem('@Template:user');
+  const [data, setData] = useState<AuthState>({} as AuthState);
+  const [loading, setLoading] = useState(true);
 
-    if (token && user) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
+  useEffect(() => {
+    async function loadStorageData(): Promise<void> {
+      const token = localStorage.getItem('@AGF-BI:token');
+      const user = localStorage.getItem('@AGF-BI:user');
+      const fatMFs = localStorage.getItem(
+        `@AGF-BI:fat?filial=0101&grupo=0510&ano=2019,%202020`,
+      );
+      if (token && user) {
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
-      return { token, user: JSON.parse(user) };
+        setData({ token, user: JSON.parse(user) });
+      }
+
+      if (fatMFs) {
+        await mutate(
+          'fat?filial=0101&grupo=0510&ano=2019,%202020',
+          JSON.parse(fatMFs),
+        );
+      } else {
+        await mutate(
+          'fat?filial=0101&grupo=0510&ano=2019,%202020',
+          api
+            .get('fat?filial=0101&grupo=0510&ano=2019,%202020')
+            .then(res => res.data),
+        );
+      }
+      setLoading(false);
     }
-
-    return {} as AuthState;
-  });
+    loadStorageData();
+  }, []);
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', {
@@ -49,22 +78,22 @@ const AuthProvider: React.FC = ({ children }) => {
 
     const { token, user } = response.data;
 
-    localStorage.setItem('@Template:token', token);
-    localStorage.setItem('@Template:user', JSON.stringify(user));
+    localStorage.setItem('@AGF-BI:token', token);
+    localStorage.setItem('@AGF-BI:user', JSON.stringify(user));
 
     setData({ token, user });
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@Template:token');
-    localStorage.removeItem('@Template:user');
+    localStorage.removeItem('@AGF-BI:token');
+    localStorage.removeItem('@AGF-BI:user');
 
     setData({} as AuthState);
   }, []);
 
   const updateUser = useCallback(
     (user: User) => {
-      localStorage.setItem('@Template:user', JSON.stringify(user));
+      localStorage.setItem('@AGF-BI:user', JSON.stringify(user));
 
       setData({
         token: data.token,
@@ -76,7 +105,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, updateUser }}
+      value={{ user: data.user, signIn, signOut, updateUser, loading }}
     >
       {children}
     </AuthContext.Provider>
