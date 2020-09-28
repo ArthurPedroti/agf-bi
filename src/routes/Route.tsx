@@ -26,18 +26,18 @@ const Route: React.FC<RouterProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { logged } = useAuth();
 
   return (
     <ReactDOMRoute
       {...rest}
       render={({ location }) => {
-        return isPrivate === !!user ? (
+        return isPrivate === !!logged ? (
           <Component />
         ) : (
           <Redirect
             to={{
-              pathname: isPrivate ? '/' : '/',
+              pathname: isPrivate ? '/' : '/dashboard',
               state: { from: location },
             }}
           />

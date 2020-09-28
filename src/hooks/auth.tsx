@@ -8,48 +8,35 @@ import React, {
 import { mutate } from 'swr';
 import api from '../services/api';
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar_url: string;
-}
-
 interface AuthState {
-  token: string;
-  user: User;
+  logged: boolean;
 }
 
 interface SignInCredentials {
-  email: string;
   password: string;
 }
 
 interface AuthContextData {
-  user: User;
+  logged: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
-  updateUser(user: User): void;
   loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AuthState>({} as AuthState);
+  const [logged, setLogged] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
-      const token = localStorage.getItem('@AGF-BI:token');
-      const user = localStorage.getItem('@AGF-BI:user');
+      const isLogged = localStorage.getItem('@AGF-BI:logged');
       const fatMFs = localStorage.getItem(
         `@AGF-BI:fat?filial=0101&grupo=0510&ano=2019,%202020`,
       );
-      if (token && user) {
-        api.defaults.headers.authorization = `Bearer ${token}`;
-
-        setData({ token, user: JSON.parse(user) });
+      if (isLogged) {
+        setLogged({ logged: JSON.parse(isLogged) });
       }
 
       if (fatMFs) {
@@ -70,42 +57,27 @@ const AuthProvider: React.FC = ({ children }) => {
     loadStorageData();
   }, []);
 
-  const signIn = useCallback(async ({ email, password }) => {
-    const response = await api.post('sessions', {
-      email,
-      password,
-    });
+  const signIn = useCallback(async ({ password }) => {
+    if (password !== '!agf123#') {
+      setLogged({ logged: false });
+      throw Error('Senha incorreta');
+    }
 
-    const { token, user } = response.data;
+    localStorage.setItem('@AGF-BI:logged', JSON.stringify(true));
 
-    localStorage.setItem('@AGF-BI:token', token);
-    localStorage.setItem('@AGF-BI:user', JSON.stringify(user));
-
-    setData({ token, user });
+    setLogged({ logged: true });
   }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@AGF-BI:token');
     localStorage.removeItem('@AGF-BI:user');
 
-    setData({} as AuthState);
+    setLogged({} as AuthState);
   }, []);
-
-  const updateUser = useCallback(
-    (user: User) => {
-      localStorage.setItem('@AGF-BI:user', JSON.stringify(user));
-
-      setData({
-        token: data.token,
-        user,
-      });
-    },
-    [setData, data.token],
-  );
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, updateUser, loading }}
+      value={{ logged: logged.logged, signIn, signOut, loading }}
     >
       {children}
     </AuthContext.Provider>

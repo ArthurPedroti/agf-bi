@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, TableWrap } from './styles';
+import { Container, TableWrap, Header } from './styles';
 import { useFetch } from '../../hooks/useFetch';
 import PivotTable from '../../components/PivotTable/index.js';
 
@@ -26,6 +26,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
+      <Header>Vendas Máquinas de Fio</Header>
       <TableWrap>
         <PivotTable
           data={data}
