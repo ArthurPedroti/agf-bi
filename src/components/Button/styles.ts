@@ -5,15 +5,17 @@ export const Container = styled.button`
   background: ${props => props.theme.colors.primary};
   height: 56px;
   border-radius: 10px;
-  border: 0;
+  border: 2px solid ${props => props.theme.colors.primary};
   padding: 0 16px;
-  color: #312e38;
+  color: ${props => shade(0.2, props.theme.colors.backgroundLight)};
   width: 100%;
   font-weight: 500;
   margin-top: 16px;
-  transition: background-color 0.2s;
+  transition: background-color 0.4s;
 
   &:hover {
-    background: ${props => shade(0.2, props.theme.colors.primary)};
+    background: ${props => shade(0.2, props.theme.colors.backgroundLight)};
+    border: 2px solid ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.text};
   }
 `;

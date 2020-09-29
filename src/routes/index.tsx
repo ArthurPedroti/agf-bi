@@ -6,7 +6,12 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 
-import Dashboard from '../pages/Dashboard';
+import SalesMFs from '../pages/SalesMFs';
+import SalesRomp from '../pages/SalesRomp';
+import SalesGer from '../pages/SalesGer';
+import SalesOutros from '../pages/SalesOutros';
+import SalesAll from '../pages/SalesAll';
+import Menu from '../pages/Menu';
 import { useAuth } from '../hooks/auth';
 
 const Container = styled.div`
@@ -50,7 +55,12 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
-      <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/menu" component={Menu} isPrivate />
+      <Route path="/sales-mfs" component={SalesMFs} isPrivate />
+      <Route path="/sales-romp" component={SalesRomp} isPrivate />
+      <Route path="/sales-ger" component={SalesGer} isPrivate />
+      <Route path="/sales-outros" component={SalesOutros} isPrivate />
+      <Route path="/sales-all" component={SalesAll} isPrivate />
     </Switch>
   );
 };

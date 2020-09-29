@@ -35,6 +35,15 @@ const AuthProvider: React.FC = ({ children }) => {
       const fatMFs = localStorage.getItem(
         `@AGF-BI:fat?filial=0101&grupo=0510&ano=2019,%202020`,
       );
+      const fatRomp = localStorage.getItem(
+        `@AGF-BI:fat?filial=0101&grupo=0010&ano=2019,%202020`,
+      );
+      const fatGer = localStorage.getItem(
+        `@AGF-BI:fat?filial=0101&grupo=0500&ano=2019,%202020`,
+      );
+      const fatOutros = localStorage.getItem(
+        `@AGF-BI:fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020`,
+      );
       if (isLogged) {
         setLogged({ logged: JSON.parse(isLogged) });
       }
@@ -52,6 +61,51 @@ const AuthProvider: React.FC = ({ children }) => {
             .then(res => res.data),
         );
       }
+
+      if (fatRomp) {
+        await mutate(
+          'fat?filial=0101&grupo=0010&ano=2019,%202020',
+          JSON.parse(fatRomp),
+        );
+      } else {
+        await mutate(
+          'fat?filial=0101&grupo=0010&ano=2019,%202020',
+          api
+            .get('fat?filial=0101&grupo=0010&ano=2019,%202020')
+            .then(res => res.data),
+        );
+      }
+
+      if (fatGer) {
+        await mutate(
+          'fat?filial=0101&grupo=0500&ano=2019,%202020',
+          JSON.parse(fatGer),
+        );
+      } else {
+        await mutate(
+          'fat?filial=0101&grupo=0500&ano=2019,%202020',
+          api
+            .get('fat?filial=0101&grupo=0500&ano=2019,%202020')
+            .then(res => res.data),
+        );
+      }
+
+      if (fatOutros) {
+        await mutate(
+          'fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020',
+          JSON.parse(fatOutros),
+        );
+      } else {
+        await mutate(
+          'fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020',
+          api
+            .get(
+              'fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020',
+            )
+            .then(res => res.data),
+        );
+      }
+
       setLoading(false);
     }
     loadStorageData();
