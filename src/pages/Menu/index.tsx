@@ -43,6 +43,9 @@ const Dashboard: React.FC = () => {
             Vendas - Demais Máquinas e Equipamentos
           </Button>
         </Link>
+        <Link to="/op-costs">
+          <Button style={{ fontSize: 20 }}>Custo de Fabricação</Button>
+        </Link>
         <Link to="/sales-all">
           <Button style={{ fontSize: 20 }}>Vendas - Todas</Button>
         </Link>
