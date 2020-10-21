@@ -10,16 +10,16 @@
 </h3>
 
 <p align="center">
-  <img alt="Languagues" src="https://img.shields.io/github/languages/count/ArthurPedroti/react-frontend-template">
-  <img alt="Top Languague" src="https://img.shields.io/github/languages/top/ArthurPedroti/react-frontend-template">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ArthurPedroti/react-frontend-template">
-  <a href="https://github.com/ArthurPedroti/react-frontend-template/commits/master">
-    <img alt="Last commit date" src="https://img.shields.io/github/last-commit/ArthurPedroti/react-frontend-template">
+  <img alt="Languagues" src="https://img.shields.io/github/languages/count/ArthurPedroti/agf-bi">
+  <img alt="Top Languague" src="https://img.shields.io/github/languages/top/ArthurPedroti/agf-bi">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ArthurPedroti/agf-bi">
+  <a href="https://github.com/ArthurPedroti/agf-bi/commits/master">
+    <img alt="Last commit date" src="https://img.shields.io/github/last-commit/ArthurPedroti/agf-bi">
   </a>
-   <a href="https://github.com/ArthurPedroti/react-frontend-template/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/ArthurPedroti/react-frontend-template">
+   <a href="https://github.com/ArthurPedroti/agf-bi/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/ArthurPedroti/agf-bi">
   </a>
-  <img alt="License" src="https://img.shields.io/github/license/ArthurPedroti/react-frontend-template">
+  <img alt="License" src="https://img.shields.io/github/license/ArthurPedroti/agf-bi">
 </p>
 <p align="center">
 
@@ -53,13 +53,10 @@
 
 ## Description
 
-A template for ReactJS frontend projects
+This is a project at AGF Equipamentos that aims show several business indicators.
+This project is writted in Typescript using React. To managed api request, we use SWR with axios and local storage to the first loadings.
 
-## :computer: Languages
-
-- **#TypeScript**
-
-## :books: Technologies
+## :books: Technologies / Libraries
 
 - **#React**
 - **#ESLint**
@@ -89,7 +86,7 @@ yarn start
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ArthurPedroit/react-frontend-template/issues). You can also take a look at the [contributing guide](https://github.com/ArthurPedroit/react-frontend-template/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ArthurPedroit/agf-bi/issues). You can also take a look at the [contributing guide](https://github.com/ArthurPedroit/agf-bi/blob/master/CONTRIBUTING.md).
 
 ## Show your support
 
@@ -98,7 +95,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2020 [Arthur Pedroti](https://github.com/ArthurPedroti).<br />
-This project is [MIT](https://github.com/ArthurPedroit/react-frontend-template/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/ArthurPedroit/agf-bi/blob/master/LICENSE) licensed.
 
 ---
 
