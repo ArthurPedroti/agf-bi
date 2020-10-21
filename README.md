@@ -6,7 +6,7 @@
 </h1>
 
 <h3 align="center" >
-  A template for ReactJS frontend projects
+  A BI dashboard powered by pivot tables!
 </h3>
 
 <p align="center">

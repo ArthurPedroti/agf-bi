@@ -57,11 +57,13 @@ const AuthProvider: React.FC = ({ children }) => {
           JSON.parse(fatMFs),
         );
       } else {
-        await mutate(
-          'fat?filial=0101&grupo=0510&ano=2019,%202020',
-          api
-            .get('fat?filial=0101&grupo=0510&ano=2019,%202020')
-            .then(res => res.data),
+        const data = await api
+          .get('fat?filial=0101&grupo=0510&ano=2019,%202020')
+          .then(res => res.data);
+        await mutate('fat?filial=0101&grupo=0510&ano=2019,%202020', data);
+        localStorage.setItem(
+          `@AGF-BI:fat?filial=0101&grupo=0510&ano=2019,%202020`,
+          JSON.stringify(data),
         );
       }
 
@@ -71,11 +73,13 @@ const AuthProvider: React.FC = ({ children }) => {
           JSON.parse(fatRomp),
         );
       } else {
-        await mutate(
-          'fat?filial=0101&grupo=0010&ano=2019,%202020',
-          api
-            .get('fat?filial=0101&grupo=0010&ano=2019,%202020')
-            .then(res => res.data),
+        const data = await api
+          .get('fat?filial=0101&grupo=0010&ano=2019,%202020')
+          .then(res => res.data);
+        await mutate('fat?filial=0101&grupo=0010&ano=2019,%202020', data);
+        localStorage.setItem(
+          `@AGF-BI:fat?filial=0101&grupo=0010&ano=2019,%202020`,
+          JSON.stringify(data),
         );
       }
 
@@ -85,11 +89,13 @@ const AuthProvider: React.FC = ({ children }) => {
           JSON.parse(fatGer),
         );
       } else {
-        await mutate(
-          'fat?filial=0101&grupo=0500&ano=2019,%202020',
-          api
-            .get('fat?filial=0101&grupo=0500&ano=2019,%202020')
-            .then(res => res.data),
+        const data = await api
+          .get('fat?filial=0101&grupo=0500&ano=2019,%202020')
+          .then(res => res.data);
+        await mutate('fat?filial=0101&grupo=0500&ano=2019,%202020', data);
+        localStorage.setItem(
+          `@AGF-BI:fat?filial=0101&grupo=0500&ano=2019,%202020`,
+          JSON.stringify(data),
         );
       }
 
@@ -99,13 +105,18 @@ const AuthProvider: React.FC = ({ children }) => {
           JSON.parse(fatOutros),
         );
       } else {
+        const data = await api
+          .get(
+            'fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020',
+          )
+          .then(res => res.data);
         await mutate(
           'fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020',
-          api
-            .get(
-              'fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020',
-            )
-            .then(res => res.data),
+          data,
+        );
+        localStorage.setItem(
+          `@AGF-BI:fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020`,
+          JSON.stringify(data),
         );
       }
 
@@ -115,13 +126,18 @@ const AuthProvider: React.FC = ({ children }) => {
           JSON.parse(opCosts),
         );
       } else {
+        const data = await api
+          .get(
+            'op-costs?filial=0101&ano=2019,%202020&grupo=0080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570',
+          )
+          .then(res => res.data);
         await mutate(
           'op-costs?filial=0101&ano=2019,%202020&grupo=0080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570',
-          api
-            .get(
-              'op-costs?filial=0101&ano=2019,%202020&grupo=0080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570',
-            )
-            .then(res => res.data),
+          data,
+        );
+        localStorage.setItem(
+          `@AGF-BI:op-costs?filial=0101&ano=2019,%202020&grupo=0080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570`,
+          JSON.stringify(data),
         );
       }
 

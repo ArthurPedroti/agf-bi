@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Container, Menu } from './styles';
-import { useFetch } from '../../hooks/useFetch';
 import Button from '../../components/Button';
 
 export interface Data {
@@ -13,18 +12,6 @@ export interface Data {
 }
 
 const Dashboard: React.FC = () => {
-  const { data } = useFetch<Data[]>(
-    'fat?filial=0101&grupo=0510&ano=2019,%202020',
-  );
-
-  if (!data) {
-    return (
-      <Container>
-        <h1>Carregando...</h1>
-      </Container>
-    );
-  }
-
   return (
     <Container>
       <h1>Menu</h1>

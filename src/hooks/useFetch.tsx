@@ -15,7 +15,7 @@ export function useFetch<Data = any, Error = any>(
     url,
     async urlparam => {
       const response = await api.get(urlparam, params);
-      await localStorage.setItem(
+      localStorage.setItem(
         `@AGF-BI:${urlparam}`,
         JSON.stringify(response.data),
       );
