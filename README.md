@@ -54,11 +54,14 @@
 ## Description
 
 This is a project at AGF Equipamentos that aims show several business indicators.
-This project is writted in Typescript using React. To managed api request, we use SWR with axios and local storage to the first loadings.
+This project is writted in Typescript using React. To managed api request, we use SWR with axios and local storage to the first loadings. For create the BI tables, we used the library "React-Pivottable".
 
 ## :books: Technologies / Libraries
 
 - **#React**
+- **#ReactPivottable**
+- **#SWR**
+- **#Axios**
 - **#ESLint**
 - **#Prettier**
 - **#Styled-Components**
@@ -86,7 +89,7 @@ yarn start
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ArthurPedroit/agf-bi/issues). You can also take a look at the [contributing guide](https://github.com/ArthurPedroit/agf-bi/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ArthurPedroit/agf-bi/issues).
 
 ## Show your support
 
