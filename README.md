@@ -1,5 +1,6 @@
 <h1 align="center">
-  <img alt="Template" src="./src/assets/template.PNG" width="400px" style="border-radius:16px;"/>
+  <img alt="Template" src="./src/assets/agf-bi-1.PNG" width="400px" style="border-radius:16px;"/>
+  <img alt="Template" src="./src/assets/agf-bi-2.PNG" width="400px" style="border-radius:16px;"/>
 </h1>
 
 <h3 align="center" >

@@ -59,9 +59,13 @@ const AuthProvider: React.FC = ({ children }) => {
       } else {
         await mutate(
           'fat?filial=0101&grupo=0510&ano=2019,%202020',
-          api
-            .get('fat?filial=0101&grupo=0510&ano=2019,%202020')
-            .then(res => res.data),
+          api.get('fat?filial=0101&grupo=0510&ano=2019,%202020').then(res => {
+            localStorage.setItem(
+              `@AGF-BI:fat?filial=0101&grupo=0510&ano=2019,%202020`,
+              JSON.stringify(res.data),
+            );
+            return res.data;
+          }),
         );
       }
 
@@ -73,9 +77,13 @@ const AuthProvider: React.FC = ({ children }) => {
       } else {
         await mutate(
           'fat?filial=0101&grupo=0010&ano=2019,%202020',
-          api
-            .get('fat?filial=0101&grupo=0010&ano=2019,%202020')
-            .then(res => res.data),
+          api.get('fat?filial=0101&grupo=0010&ano=2019,%202020').then(res => {
+            localStorage.setItem(
+              `@AGF-BI:fat?filial=0101&grupo=0010&ano=2019,%202020`,
+              JSON.stringify(res.data),
+            );
+            return res.data;
+          }),
         );
       }
 
