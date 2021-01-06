@@ -23,7 +23,6 @@ jobs:
       run: yarn build
       env:
         REACT_APP_SERVER: http://192.168.2.250:9001
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       
     - name: Copy project to AGF
       uses: appleboy/scp-action@master
