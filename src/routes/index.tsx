@@ -11,6 +11,7 @@ import SalesRomp from '../pages/SalesRomp';
 import SalesGer from '../pages/SalesGer';
 import SalesOutros from '../pages/SalesOutros';
 import OpCosts from '../pages/OpCosts';
+import Margin from '../pages/Margin';
 import Menu from '../pages/Menu';
 import { useAuth } from '../hooks/auth';
 
@@ -61,6 +62,7 @@ const Routes: React.FC = () => {
       <Route path="/sales-ger" component={SalesGer} isPrivate />
       <Route path="/sales-outros" component={SalesOutros} isPrivate />
       <Route path="/op-costs" component={OpCosts} isPrivate />
+      <Route path="/margin" component={Margin} isPrivate />
     </Switch>
   );
 };

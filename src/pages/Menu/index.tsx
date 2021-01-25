@@ -33,6 +33,9 @@ const Dashboard: React.FC = () => {
         <Link to="/op-costs">
           <Button style={{ fontSize: 20 }}>Custo de Fabricação</Button>
         </Link>
+        <Link to="/margin">
+          <Button style={{ fontSize: 20 }}>Margem dos produtos</Button>
+        </Link>
       </Menu>
     </Container>
   );
