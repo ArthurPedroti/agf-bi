@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import { Container, Header, HeaderMeta } from './styles';
+import { Container } from './styles';
 import { useFetch } from '../../hooks/useFetch';
 import PivotTable from '../../components/PivotTable/index.js';
+import Header from '../../components/Header';
 
 export interface Data {
   PRODUTO: string;
@@ -28,14 +27,8 @@ const SalesMFs: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <HeaderMeta>
-          <Link to="/menu">
-            <FiArrowLeft size={20} />
-          </Link>
-          <h1>Vendas - Máquinas à fio</h1>
-        </HeaderMeta>
-      </Header>
+      <Header title="Vendas - Máquinas à fio" />
+
       <PivotTable
         data={data}
         rows={['PRODUTO']}

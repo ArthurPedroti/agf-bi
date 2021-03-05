@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { Container, Menu } from './styles';
+import { Container, Menu, Header } from './styles';
 import Button from '../../components/Button';
+import logoImg from '../../assets/logo.svg';
 
 export interface Data {
   PRODUTO: string;
@@ -14,7 +15,12 @@ export interface Data {
 const Dashboard: React.FC = () => {
   return (
     <Container>
-      <h1>Menu</h1>
+      <Header>
+        <div>
+          <img src={logoImg} alt="AGF" />
+          <h2>Bi</h2>
+        </div>
+      </Header>
       <Menu>
         <Link to="/sales-romp">
           <Button style={{ fontSize: 20 }}>Vendas - Rompedores</Button>

@@ -14,7 +14,13 @@ import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import {
+  Container,
+  Content,
+  AnimationContainer,
+  Background,
+  Header,
+} from './styles';
 
 interface SignInFormData {
   password: string;
@@ -66,7 +72,12 @@ const SignIn: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          <img src={logoImg} alt="AGF" />
+          <Header>
+            <div>
+              <img src={logoImg} alt="AGF" />
+              <h2>Bi</h2>
+            </div>
+          </Header>
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Digite a senha</h1>

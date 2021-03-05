@@ -10,6 +10,27 @@ export const Container = styled.div`
   align-items: stretch;
 `;
 
+export const Header = styled.div`
+  div {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 220px;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 132px;
+      margin-bottom: 0;
+      background-image: linear-gradient(90deg, #fdd000, #e58a00);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;

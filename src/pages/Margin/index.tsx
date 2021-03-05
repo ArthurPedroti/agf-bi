@@ -1,21 +1,162 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import { Container, Header, HeaderMeta } from './styles';
+import PivotGrid, { FieldChooser } from 'devextreme-react/pivot-grid';
+import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
+import { Button, InputGroup, FormControl, Container } from 'react-bootstrap';
+import { Container as Cont } from './styles';
 import { useFetch } from '../../hooks/useFetch';
-import PivotTable from '../../components/PivotTable/index.js';
+import Header from '../../components/Header';
 
 export interface Data {
   PRODUTO: string;
+  DESCRICAO: string;
   ANO: string;
   MES: string;
   QTD: number;
+  MARGEM: number;
 }
 
 const Margin: React.FC = () => {
+  const [productDescription, setProductDescription] = useState('');
   const { data } = useFetch<Data[]>(
     'fat?filial=0101&ano=2020,%202021&devolution=no',
+  );
+  const [dataSource, setDataSource] = useState<PivotGridDataSource>();
+  const [dataFiltered, setDataFiltered] = useState(data);
+
+  const handleSubmit = useCallback(() => {
+    const newData = data.filter((item: Data) => {
+      if (
+        item.DESCRICAO.includes(`${productDescription.toUpperCase().trim()}`)
+      ) {
+        return item;
+      }
+      return null;
+    });
+    setDataFiltered(newData);
+  }, [data, productDescription]);
+
+  useEffect(() => {
+    const dataSource2 = new PivotGridDataSource({
+      fields: [
+        {
+          caption: 'PRODUTO',
+          width: 120,
+          dataField: 'PRODUTO',
+          showTotals: false,
+          area: 'row',
+        },
+        {
+          caption: 'DESCRIÇÃO',
+          width: 120,
+          dataField: 'DESCRICAO',
+          area: 'row',
+          headerFilter: {
+            allowSearch: true,
+          },
+        },
+        {
+          dataField: 'ANO',
+          area: 'column',
+        },
+        {
+          dataField: 'MES',
+          area: 'column',
+        },
+        {
+          caption: 'MARGEM',
+          dataField: 'MARGEM',
+          dataType: 'number',
+          format(data2: any) {
+            return `${Math.round((data2 + Number.EPSILON) * 100) / 100}%`;
+          },
+          summaryType: 'avg',
+          area: 'data',
+        },
+        {
+          caption: 'VALOR',
+          dataField: 'VALOR',
+          dataType: 'number',
+          format(data2: any) {
+            return `${new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(data2)}`;
+          },
+          summaryType: 'sum',
+          area: 'data',
+        },
+      ],
+      store: dataFiltered,
+    });
+
+    setDataSource(dataSource2);
+  }, [dataFiltered]);
+
+  const isDataCell = useCallback((cell: any): any => {
+    return (
+      cell.area === 'data' && cell.rowType === 'D' && cell.columnType === 'D'
+    );
+  }, []);
+
+  const isTotalCell = useCallback((cell: any): any => {
+    return (
+      cell.type === 'T' ||
+      cell.type === 'GT' ||
+      cell.rowType === 'T' ||
+      cell.rowType === 'GT' ||
+      cell.columnType === 'T' ||
+      cell.columnType === 'GT'
+    );
+  }, []);
+
+  const getCssStyles = useCallback(({ fill, font, bold }: any): any => {
+    return {
+      'background-color': `#${fill}`,
+      color: `#${font}`,
+      'font-weight': bold ? 'bold' : undefined,
+    };
+  }, []);
+
+  const getConditionalAppearance = useCallback(
+    (cell: any): Record<string, any> => {
+      if (isTotalCell(cell)) {
+        return { fill: 'F2F2F2', font: '3F3F3F', bold: true };
+      }
+
+      const { value, text } = cell;
+      if (text.includes('%') && value < 20) {
+        return { font: '9C0006', fill: 'FFC7CE' };
+      }
+      if (text.includes('%') && value < 40) {
+        return { font: '9C6500', fill: 'FFEB9C' };
+      }
+      return {};
+    },
+    [isTotalCell],
+  );
+
+  const onCellPrepared = useCallback(
+    ({ cell, area, cellElement }: any): any => {
+      const cellMod = cell;
+      cellMod.area = area;
+
+      if (isDataCell(cellMod) || isTotalCell(cellMod)) {
+        const appearance = getConditionalAppearance(cellMod);
+        Object.assign(cellElement.style, getCssStyles(appearance));
+      }
+    },
+    [getConditionalAppearance, getCssStyles, isDataCell, isTotalCell],
+  );
+
+  // submit on press Enter
+  const keyPressed = useCallback(
+    (event: { key: string }): void => {
+      if (event.key === 'Enter') {
+        handleSubmit();
+      }
+    },
+    [handleSubmit],
   );
 
   if (!data) {
@@ -27,23 +168,46 @@ const Margin: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Header>
-        <HeaderMeta>
-          <Link to="/menu">
-            <FiArrowLeft size={20} />
-          </Link>
-          <h1>Margem dos Produtos</h1>
-        </HeaderMeta>
-      </Header>
-      <PivotTable
-        data={data}
-        rows={['PRODUTO']}
-        cols={['ANO', 'MES']}
-        aggregatorName="Average"
-        vals={['MARGEM']}
-      />
-    </Container>
+    <Cont>
+      <Header title="Margem dos Produtos" />
+
+      <Container fluid>
+        <InputGroup className="mb-3">
+          <FormControl
+            placeholder="Filtrar pela descrição..."
+            aria-label="Código do Produto"
+            aria-describedby="basic-addon2"
+            autoFocus
+            onKeyPress={keyPressed}
+            onChange={e => setProductDescription(e.target.value)}
+          />
+          <InputGroup.Append>
+            <Button
+              variant="outline-warning"
+              onClick={() => handleSubmit()}
+              type="submit"
+            >
+              Enviar
+            </Button>
+          </InputGroup.Append>
+        </InputGroup>
+      </Container>
+
+      <div id="pivot">
+        <PivotGrid
+          id="sales"
+          dataSource={dataSource}
+          onCellPrepared={onCellPrepared}
+          allowSortingBySummary
+          allowSorting
+          allowFiltering
+          allowExpandAll
+          showBorders
+        >
+          <FieldChooser enabled />
+        </PivotGrid>
+      </div>
+    </Cont>
   );
 };
 
