@@ -45,7 +45,7 @@ const AuthProvider: React.FC = ({ children }) => {
         `@AGF-BI:fat?filial=0101&grupo=0050,%200060,%200070,%200090,%200094,%200501,%200502,%200503,%200520,%200530,%200540,%200550,%200560,%200570&ano=2019,%202020,%202021`,
       );
       const opCosts = localStorage.getItem(
-        `@AGF-BI:op-costs?filial=0101&ano=2019,%202020,%202021&grupo=0010,%200080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570`,
+        `@AGF-BI:op-costs?filial=0101&ano=2019,%202020,%202021`,
       );
       const margin = localStorage.getItem(
         `@AGF-BI:fat?filial=0101&ano=2020,%202021&devolution=no`,
@@ -134,21 +134,16 @@ const AuthProvider: React.FC = ({ children }) => {
 
       if (opCosts) {
         await mutate(
-          'op-costs?filial=0101&ano=2019,%202020,%202021&grupo=0010,%200080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570',
+          'op-costs?filial=0101&ano=2019,%202020,%202021',
           JSON.parse(opCosts),
         );
       } else {
         const data = await api
-          .get(
-            'op-costs?filial=0101&ano=2019,%202020,%202021&grupo=0010,%200080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570',
-          )
+          .get('op-costs?filial=0101&ano=2019,%202020,%202021')
           .then(res => res.data);
-        await mutate(
-          'op-costs?filial=0101&ano=2019,%202020,%202021&grupo=0010,%200080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570',
-          data,
-        );
+        await mutate('op-costs?filial=0101&ano=2019,%202020,%202021', data);
         localStorage.setItem(
-          `@AGF-BI:op-costs?filial=0101&ano=2019,%202020,%202021&grupo=0010,%200080,%200094,%200500,%200501,%200502,%200503,%200510,%200520,%200540,%200550,%200560,%200570`,
+          `@AGF-BI:op-costs?filial=0101&ano=2019,%202020,%202021`,
           JSON.stringify(data),
         );
       }

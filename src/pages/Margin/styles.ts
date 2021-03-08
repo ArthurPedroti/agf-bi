@@ -6,10 +6,6 @@ export const Container = styled.div`
   flex-direction: column;
   padding-bottom: 16px;
 
-  .pvtUi {
-    margin: auto;
-  }
-
   #pivot {
     padding: 0 20px 0 20px;
   }

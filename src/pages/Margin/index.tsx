@@ -2,7 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import PivotGrid, { FieldChooser } from 'devextreme-react/pivot-grid';
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
-import { Button, InputGroup, FormControl, Container } from 'react-bootstrap';
+import {
+  Button,
+  DropdownButton,
+  Dropdown,
+  InputGroup,
+  FormControl,
+  Container,
+} from 'react-bootstrap';
 import { Container as Cont } from './styles';
 import { useFetch } from '../../hooks/useFetch';
 import Header from '../../components/Header';
@@ -23,18 +30,32 @@ const Margin: React.FC = () => {
   );
   const [dataSource, setDataSource] = useState<PivotGridDataSource>();
   const [dataFiltered, setDataFiltered] = useState(data);
+  const [filter, setFilter] = useState('Pesquisar pelo código');
 
   const handleSubmit = useCallback(() => {
-    const newData = data.filter((item: Data) => {
-      if (
-        item.DESCRICAO.includes(`${productDescription.toUpperCase().trim()}`)
-      ) {
-        return item;
-      }
-      return null;
-    });
+    let newData;
+    if (filter === 'Descrição') {
+      newData = data.filter((item: Data) => {
+        if (
+          item.DESCRICAO.includes(`${productDescription.toUpperCase().trim()}`)
+        ) {
+          return item;
+        }
+        return null;
+      });
+    } else {
+      newData = data.filter((item: Data) => {
+        if (
+          item.PRODUTO.includes(`${productDescription.toUpperCase().trim()}`)
+        ) {
+          return item;
+        }
+        return null;
+      });
+    }
+
     setDataFiltered(newData);
-  }, [data, productDescription]);
+  }, [data, filter, productDescription]);
 
   useEffect(() => {
     const dataSource2 = new PivotGridDataSource({
@@ -181,6 +202,19 @@ const Margin: React.FC = () => {
             onKeyPress={keyPressed}
             onChange={e => setProductDescription(e.target.value)}
           />
+          <DropdownButton
+            as={InputGroup.Append}
+            variant="outline-warning"
+            title={filter}
+            id="input-group-dropdown-2"
+          >
+            <Dropdown.Item onClick={() => setFilter('Descrição')}>
+              Descrição
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setFilter('Código')}>
+              Código
+            </Dropdown.Item>
+          </DropdownButton>
           <InputGroup.Append>
             <Button
               variant="outline-warning"
