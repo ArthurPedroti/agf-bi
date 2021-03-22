@@ -22,7 +22,7 @@ export function useFetch<Data = any, Error = any>(
       return response.data;
     },
     {
-      refreshInterval: 360000,
+      refreshInterval: 120000,
     },
   );
 

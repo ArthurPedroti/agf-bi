@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.material.lime.light.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import { ThemeProvider } from 'styled-components';
 import dark from './styles/themes/dark';

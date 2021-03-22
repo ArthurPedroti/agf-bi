@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { Container, Menu, Header } from './styles';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Header } from './styles';
 import Button from '../../components/Button';
 import logoImg from '../../assets/logo.svg';
 
@@ -15,34 +16,67 @@ export interface Data {
 const Dashboard: React.FC = () => {
   return (
     <Container>
-      <Header>
-        <div>
-          <img src={logoImg} alt="AGF" />
-          <h2>Bi</h2>
-        </div>
-      </Header>
-      <Menu>
-        <Link to="/sales-romp">
-          <Button style={{ fontSize: 20 }}>Vendas - Rompedores</Button>
-        </Link>
-        <Link to="/sales-mfs">
-          <Button style={{ fontSize: 20 }}>Vendas - Máquinas à Fio</Button>
-        </Link>
-        <Link to="/sales-ger">
-          <Button style={{ fontSize: 20 }}>Vendas - Geradores</Button>
-        </Link>
-        <Link to="/sales-outros">
-          <Button style={{ fontSize: 20 }}>
-            Vendas - Demais Máquinas e Equipamentos
-          </Button>
-        </Link>
-        <Link to="/op-costs">
-          <Button style={{ fontSize: 20 }}>Custo de Fabricação</Button>
-        </Link>
-        <Link to="/margin">
-          <Button style={{ fontSize: 20 }}>Margem dos produtos</Button>
-        </Link>
-      </Menu>
+      <Col className="justify-content-center align-items-center">
+        <Row className="justify-content-center">
+          <Header>
+            <div>
+              <img src={logoImg} alt="AGF" />
+              <h2>Bi</h2>
+            </div>
+          </Header>
+        </Row>
+        <Row>
+          <Col>
+            <Link to="/sales-romp">
+              <Button style={{ fontSize: 20 }}>Vendas - Rompedores</Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to="/sales-mfs">
+              <Button style={{ fontSize: 20 }}>Vendas - Máquinas à Fio</Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to="/sales-ger">
+              <Button style={{ fontSize: 20 }}>Vendas - Geradores</Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Link to="/sales-outros">
+              <Button style={{ fontSize: 20 }}>Vendas - Outros</Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to="/op-costs">
+              <Button style={{ fontSize: 20 }}>Custo de Fabricação</Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to="/margin">
+              <Button style={{ fontSize: 20 }}>Margem dos produtos</Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Link to="/productivity">
+              <Button style={{ fontSize: 20 }}>Produtividade</Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to="/breakers">
+              <Button style={{ fontSize: 20 }}>Ordens Rompedores</Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to="/plates">
+              <Button style={{ fontSize: 20 }}>PCs Chapas</Button>
+            </Link>
+          </Col>
+        </Row>
+      </Col>
     </Container>
   );
 };

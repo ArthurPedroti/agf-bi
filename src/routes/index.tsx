@@ -12,7 +12,10 @@ import SalesGer from '../pages/SalesGer';
 import SalesOutros from '../pages/SalesOutros';
 import OpCosts from '../pages/OpCosts';
 import Margin from '../pages/Margin';
+import Breakers from '../pages/Breakers';
+import Plates from '../pages/Plates';
 import Menu from '../pages/Menu';
+import Productivity from '../pages/Productivity';
 import { useAuth } from '../hooks/auth';
 
 const Container = styled.div`
@@ -63,6 +66,9 @@ const Routes: React.FC = () => {
       <Route path="/sales-outros" component={SalesOutros} isPrivate />
       <Route path="/op-costs" component={OpCosts} isPrivate />
       <Route path="/margin" component={Margin} isPrivate />
+      <Route path="/productivity" component={Productivity} isPrivate />
+      <Route path="/breakers" component={Breakers} isPrivate />
+      <Route path="/plates" component={Plates} isPrivate />
     </Switch>
   );
 };

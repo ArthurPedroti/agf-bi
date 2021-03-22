@@ -1,21 +1,23 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
 
 export const Container = styled.button`
-  background: ${props => props.theme.colors.primary};
-  height: 56px;
-  border-radius: 10px;
-  border: 2px solid ${props => props.theme.colors.primary};
-  padding: 0 16px;
-  color: ${props => shade(0.2, props.theme.colors.backgroundLight)};
   width: 100%;
-  font-weight: 500;
-  margin-top: 16px;
-  transition: background-color 0.4s;
+  margin-top: 10px;
+  color: ${props => props.theme.colors.text};
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 200ms ease-in 0s;
+  background: ${props => props.theme.colors.backgroundLight};
+  padding: 12px 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${props => props.theme.colors.primary};
+  border-image: initial;
+  border-radius: 5px;
 
   &:hover {
-    background: ${props => shade(0.2, props.theme.colors.backgroundLight)};
-    border: 2px solid ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.text};
+    transition: all 200ms ease-in 0s;
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.backgroundLight};
   }
 `;

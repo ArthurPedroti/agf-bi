@@ -50,6 +50,19 @@ const AuthProvider: React.FC = ({ children }) => {
       const margin = localStorage.getItem(
         `@AGF-BI:fat?filial=0101,0102&ano=2020,%202021&devolution=no`,
       );
+      const breakers = localStorage.getItem(
+        `@AGF-BI:pcs?filial=0101&grupo=0010&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+      );
+      const breakersStock = localStorage.getItem(
+        `@AGF-BI:estoques?filial=0101&grupo=0010&armazem=01,06`,
+      );
+      const plates = localStorage.getItem(
+        `@AGF-BI:pcs?filial=0101&grupo=3050&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+      );
+      const platesStock = localStorage.getItem(
+        `@AGF-BI:estoques?filial=0101&grupo=3050&armazem=01,06`,
+      );
+
       if (isLogged) {
         setLogged({ logged: JSON.parse(isLogged) });
       }
@@ -157,9 +170,86 @@ const AuthProvider: React.FC = ({ children }) => {
         const data = await api
           .get('fat?filial=0101,0102&ano=2020,%202021&devolution=no')
           .then(res => res.data);
-        await mutate('fat?filial=0101,0102&ano=2020,%202021&devolution=no', data);
+        await mutate(
+          'fat?filial=0101,0102&ano=2020,%202021&devolution=no',
+          data,
+        );
         localStorage.setItem(
           `@AGF-BI:fat?filial=0101,0102&ano=2020,%202021&devolution=no`,
+          JSON.stringify(data),
+        );
+      }
+
+      if (breakers) {
+        await mutate(
+          `pcs?filial=0101&grupo=0010&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          JSON.parse(breakers),
+        );
+      } else {
+        const data = await api
+          .get(
+            `pcs?filial=0101&grupo=0010&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          )
+          .then(res => res.data);
+        await mutate(
+          `pcs?filial=0101&grupo=0010&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          data,
+        );
+        localStorage.setItem(
+          `@AGF-BI:pcs?filial=0101&grupo=0010&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          JSON.stringify(data),
+        );
+      }
+
+      if (breakersStock) {
+        await mutate(
+          'estoques?filial=0101&grupo=0010&armazem=01,06',
+          JSON.parse(breakersStock),
+        );
+      } else {
+        const data = await api
+          .get('estoques?filial=0101&grupo=0010&armazem=01,06')
+          .then(res => res.data);
+        await mutate('estoques?filial=0101&grupo=0010&armazem=01,06', data);
+        localStorage.setItem(
+          `@AGF-BI:estoques?filial=0101&grupo=0010&armazem=01,06`,
+          JSON.stringify(data),
+        );
+      }
+
+      if (plates) {
+        await mutate(
+          `pcs?filial=0101&grupo=3050&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          JSON.parse(plates),
+        );
+      } else {
+        const data = await api
+          .get(
+            `pcs?filial=0101&grupo=3050&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          )
+          .then(res => res.data);
+        await mutate(
+          `pcs?filial=0101&grupo=3050&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          data,
+        );
+        localStorage.setItem(
+          `@AGF-BI:pcs?filial=0101&grupo=3050&legenda=PENDENTE','ATENDIDO%20PARCIALMENTE`,
+          JSON.stringify(data),
+        );
+      }
+
+      if (platesStock) {
+        await mutate(
+          'estoques?filial=0101&grupo=3050&armazem=01,06',
+          JSON.parse(platesStock),
+        );
+      } else {
+        const data = await api
+          .get('estoques?filial=0101&grupo=3050&armazem=01,06')
+          .then(res => res.data);
+        await mutate('estoques?filial=0101&grupo=3050&armazem=01,06', data);
+        localStorage.setItem(
+          `@AGF-BI:estoques?filial=0101&grupo=3050&armazem=01,06`,
           JSON.stringify(data),
         );
       }
