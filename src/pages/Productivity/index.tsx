@@ -20,7 +20,11 @@ const Productivity: React.FC = () => {
   const mesAtual = `0${getMonth(new Date()) + 1}`.slice(-2);
   // const anoAtual = getYear(new Date());
 
-  const { data } = useFetch<Data[]>(`ops?filial=0101&fechado=true&ano=2021`);
+  const { data } = useFetch<Data[]>(
+    `ops?filial=0101&fechado=true&ano=2021`,
+    {},
+    6000,
+  );
 
   if (!data) {
     return (
