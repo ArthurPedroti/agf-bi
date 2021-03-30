@@ -161,7 +161,7 @@ const Productivity: React.FC = () => {
               <GaugeChart
                 id="gauge-chart2"
                 nrOfLevels={10}
-                percent={hoursActualMonth / 9000}
+                percent={hoursActualMonth / 8994}
                 colors={['#cc3232', '#e7b416', '#2dc937']}
                 animDelay={0}
                 animateDuration={4000}
