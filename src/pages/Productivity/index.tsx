@@ -176,7 +176,7 @@ const Productivity: React.FC = () => {
               </Col>
               <Col>
                 <h2>
-                  Horas totais: <strong>9000</strong>
+                  Horas totais: <strong>8994</strong>
                 </h2>
               </Col>
             </Row>
