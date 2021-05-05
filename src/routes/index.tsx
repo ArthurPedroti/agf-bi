@@ -18,7 +18,7 @@ import Plates from '../pages/Plates';
 import Menu from '../pages/Menu';
 import Productivity from '../pages/Productivity';
 import Revenues from '../pages/Revenues';
-import Importations from '../pages/Importations';
+import Imports from '../pages/Imports';
 
 const Container = styled.div`
   display: flex;
@@ -72,7 +72,7 @@ const Routes: React.FC = () => {
       <Route path="/breakers" component={Breakers} isPrivate />
       <Route path="/plates" component={Plates} isPrivate />
       <Route path="/revenues" component={Revenues} isPrivate />
-      <Route path="/importations" component={Importations} />
+      <Route path="/imports" component={Imports} />
     </Switch>
   );
 };

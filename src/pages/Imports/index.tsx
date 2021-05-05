@@ -3,7 +3,7 @@ import React from 'react';
 import { Container as Cont } from './styles';
 import Header from '../../components/Header';
 
-const Importations: React.FC = () => {
+const Imports: React.FC = () => {
   return (
     <Cont>
       <Header title="Importações" />
@@ -22,4 +22,4 @@ const Importations: React.FC = () => {
   );
 };
 
-export default Importations;
+export default Imports;
