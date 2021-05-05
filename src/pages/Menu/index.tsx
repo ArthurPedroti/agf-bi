@@ -82,6 +82,11 @@ const Dashboard: React.FC = () => {
               <Button style={{ fontSize: 20 }}>Faturamento</Button>
             </Link>
           </Col>
+          <Col>
+            <Link to="/importations">
+              <Button style={{ fontSize: 20 }}>Importações</Button>
+            </Link>
+          </Col>
         </Row>
       </Col>
     </Container>
