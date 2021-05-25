@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  text-align: center;
-  h1 {
-    font-size: 96px;
-  }
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-bottom: 16px;
 
-  strong {
-    background-image: linear-gradient(90deg, #fdd000, #e58a00);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  #pivot {
+    margin: auto;
+    padding: 0 20px 0 20px;
   }
 `;
