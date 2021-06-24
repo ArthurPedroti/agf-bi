@@ -16,7 +16,7 @@ export interface Data {
   ANO_REAL: string;
 }
 
-const Productivity: React.FC = () => {
+const ProductivityProduction: React.FC = () => {
   const mesAtual = `0${getMonth(new Date()) + 1}`.slice(-2);
   // const anoAtual = getYear(new Date());
 
@@ -41,8 +41,11 @@ const Productivity: React.FC = () => {
     { product: 'GS190', hours: 60 },
     { product: 'AE105', hours: 20 },
     { product: 'MF25P2', hours: 77 },
+    { product: 'MF25P2E', hours: 77 },
     { product: 'MF75P2', hours: 128 },
+    { product: 'MF75P2E', hours: 128 },
     { product: 'MF100S2', hours: 131 },
+    { product: 'MF100S2E', hours: 131 },
     { product: 'VB45E', hours: 89 },
     { product: 'B02M', hours: 113 },
     { product: 'BKC03M', hours: 115 },
@@ -52,12 +55,16 @@ const Productivity: React.FC = () => {
     { product: 'CE25P10001', hours: 20 },
     { product: 'CE25P', hours: 273 },
     { product: 'MF25S2', hours: 108 },
+    { product: 'MF25S2E', hours: 108 },
     { product: 'MF25P2P', hours: 80 },
+    { product: 'MF25P2PE', hours: 80 },
     { product: 'AE340', hours: 40 },
     { product: 'MF75S2', hours: 131 },
+    { product: 'MF75S2E', hours: 131 },
     { product: 'PFF-280', hours: 32 },
     { product: 'PFF-280CIR90', hours: 32 },
     { product: 'MF50P2', hours: 120 },
+    { product: 'MF50P2E', hours: 120 },
     { product: 'REMAN', hours: 60 },
     { product: 'GS125', hours: 120 },
     { product: 'GS230', hours: 120 },
@@ -70,6 +77,7 @@ const Productivity: React.FC = () => {
     { product: 'EA66P', hours: 10 },
     { product: 'FA20H', hours: 100 },
     { product: 'MF40P2', hours: 108 },
+    { product: 'MF40P2E', hours: 108 },
     { product: 'CH250', hours: 28 },
     { product: 'CH400', hours: 28 },
     { product: 'QC200', hours: 26 },
@@ -161,7 +169,7 @@ const Productivity: React.FC = () => {
               <GaugeChart
                 id="gauge-chart2"
                 nrOfLevels={10}
-                percent={hoursActualMonth / 8994}
+                percent={hoursActualMonth / 10000}
                 colors={['#cc3232', '#e7b416', '#2dc937']}
                 animDelay={0}
                 animateDuration={4000}
@@ -176,7 +184,7 @@ const Productivity: React.FC = () => {
               </Col>
               <Col>
                 <h2>
-                  Horas totais: <strong>8994</strong>
+                  Horas totais: <strong>10000</strong>
                 </h2>
               </Col>
             </Row>
@@ -221,4 +229,4 @@ const Productivity: React.FC = () => {
   );
 };
 
-export default Productivity;
+export default ProductivityProduction;

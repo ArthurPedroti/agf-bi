@@ -17,6 +17,7 @@ import Breakers from '../pages/Breakers';
 import Plates from '../pages/Plates';
 import Menu from '../pages/Menu';
 import Productivity from '../pages/Productivity';
+import ProductivityProduction from '../pages/ProductivityProduction';
 import Revenues from '../pages/Revenues';
 import Imports from '../pages/Imports';
 
@@ -69,6 +70,10 @@ const Routes: React.FC = () => {
       <Route path="/op-costs" component={OpCosts} isPrivate />
       <Route path="/margin" component={Margin} isPrivate />
       <Route path="/productivity" component={Productivity} isPrivate />
+      <Route
+        path="/productivityproduction"
+        component={ProductivityProduction}
+      />
       <Route path="/breakers" component={Breakers} isPrivate />
       <Route path="/plates" component={Plates} isPrivate />
       <Route path="/revenues" component={Revenues} isPrivate />
