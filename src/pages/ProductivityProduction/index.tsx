@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Lottie from 'react-lottie';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import GaugeChart from 'react-gauge-chart';
 import { getMonth } from 'date-fns';
+import animationData from '../../assets/fireworks.json';
 import { Container as Cont } from './styles';
 import { useFetch } from '../../hooks/useFetch';
 import Header from '../../components/Header';
@@ -18,13 +20,28 @@ export interface Data {
 
 const ProductivityProduction: React.FC = () => {
   const mesAtual = `0${getMonth(new Date()) + 1}`.slice(-2);
-  // const anoAtual = getYear(new Date());
-
+  const [animationState, setAnimationState] = useState({
+    isStopped: true,
+    isPaused: true,
+  });
   const { data } = useFetch<Data[]>(
     `ops?filial=0101&fechado=true&ano=2021`,
     {},
     6000,
   );
+
+  const realizedHours = 2650;
+  let hoursActualMonth = 0;
+  useEffect(() => {
+    if (hoursActualMonth) {
+      if (hoursActualMonth / realizedHours >= 0.7) {
+        setAnimationState({
+          isStopped: false,
+          isPaused: false,
+        });
+      }
+    }
+  }, [hoursActualMonth, data]);
 
   if (!data) {
     return (
@@ -33,6 +50,15 @@ const ProductivityProduction: React.FC = () => {
       </Container>
     );
   }
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: false,
+    animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   const hours = [
     { product: 'VC66', hours: 20 },
@@ -132,17 +158,7 @@ const ProductivityProduction: React.FC = () => {
     'MW46V',
   ];
 
-  // const months = data.reduce((acc: any, item: any) => {
-  //   if (acc === []) {
-  //     return [...acc, item.MES_REAL];
-  //   }
-  //   if (item.MES_REAL.includes(acc)) {
-  //     return acc;
-  //   }
-  //   return [...acc, item.MES_REAL];
-  // }, []);
-
-  const hoursActualMonth = data
+  hoursActualMonth = data
     .filter(
       (dataItem: Data) =>
         products.includes(dataItem.PRODUTO) && dataItem.MES_REAL === mesAtual,
@@ -161,7 +177,24 @@ const ProductivityProduction: React.FC = () => {
 
   return (
     <>
+      <Lottie
+        options={defaultOptions}
+        height={600}
+        width={600}
+        isStopped={animationState.isStopped}
+        isPaused={animationState.isPaused}
+        style={{ position: 'absolute', top: 25, right: 30 }}
+      />
+      <Lottie
+        options={defaultOptions}
+        height={600}
+        width={600}
+        isStopped={animationState.isStopped}
+        isPaused={animationState.isPaused}
+        style={{ position: 'absolute', top: 25, left: 30 }}
+      />
       <Header title="Produtividade" />
+
       <Cont>
         <Container fluid>
           <Col>
@@ -169,13 +202,14 @@ const ProductivityProduction: React.FC = () => {
               <GaugeChart
                 id="gauge-chart2"
                 nrOfLevels={10}
-                percent={hoursActualMonth / 9576.4}
+                percent={hoursActualMonth / realizedHours}
                 colors={['#cc3232', '#e7b416', '#2dc937']}
                 animDelay={0}
                 animateDuration={4000}
                 style={{ width: '100%', maxWidth: '980px' }}
               />
             </Row>
+
             <Row>
               <Col>
                 <h2>
@@ -184,44 +218,10 @@ const ProductivityProduction: React.FC = () => {
               </Col>
               <Col>
                 <h2>
-                  Horas totais: <strong>9576.4</strong>
+                  Horas totais: <strong>{realizedHours}</strong>
                 </h2>
               </Col>
             </Row>
-            {/* <Row>
-              <Col>
-                <Row className="justify-content-center">
-                  <GaugeChart
-                    id="gauge-chart2"
-                    nrOfLevels={10}
-                    percent={hoursActualMonth / 9000}
-                    colors={['#cc3232', '#e7b416', '#2dc937']}
-                    animDelay={0}
-                    animateDuration={4000}
-                    style={{ width: '100%', maxWidth: '180px' }}
-                  />
-                </Row>
-                <Row className="justify-content-center">
-                  <h6>Janeiro</h6>
-                </Row>
-              </Col>
-              <Col>
-                <Row className="justify-content-center">
-                  <GaugeChart
-                    id="gauge-chart2"
-                    nrOfLevels={10}
-                    percent={hoursActualMonth / 9000}
-                    colors={['#cc3232', '#e7b416', '#2dc937']}
-                    animDelay={0}
-                    animateDuration={4000}
-                    style={{ width: '100%', maxWidth: '180px' }}
-                  />
-                </Row>
-                <Row className="justify-content-center">
-                  <h6>Fevereiro</h6>
-                </Row>
-              </Col>
-            </Row> */}
           </Col>
         </Container>
       </Cont>
